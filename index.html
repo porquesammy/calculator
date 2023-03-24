@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
-    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/style.css" />
     <script src="./js/script.js" defer></script>
-</head>
-<body>
-    <main class="main-container">
+  </head>
+  <body>
+    <div id="wrapper">
+    <div class="calc-background">
+      <main id="main-container" class="grid">
         <div id="screen">
-            <p class="small-text">850*850+18.05</p>
-            <p class="main-text">722,518.05</p>
+          <p class="small-text">850*850+18.05</p>
+          <p class="main-text">722,518.05</p>
         </div>
-        <button id="clear">C</button><button id="pos-neg">+/-</button><button id="percentage">%</button><button id="divide">&divide;</button>
-        
-        <button id="7">7</button><button id="8">8</button><button id="9">9</button><button id="multiply">&#xd7;</button>
-        
-        <button id="4">4</button><button id="5">5</button><button id="6">6</button><button id="subtract">-</button>
-        
-        <button id="1">1</button><button id="2">2</button><button id="3">3</button><button id="add">+</button>
-        
-        <button id="0">0</button><button id="decimal">.</button><button id="equals">=</button>
-    </main>
-    
-</body>
+        <button id="clear" class="yellow">c</button
+        ><button id="pos-neg" class="yellow">+/-</button
+        ><button id="percentage" class="yellow">%</button
+        ><button id="divide" class="yellow">&divide;</button>
+
+        <button id="7" class="purple">7</button
+        ><button id="8" class="purple">8</button
+        ><button id="9" class="purple">9</button
+        ><button id="multiply" class="yellow">&#xd7;</button>
+
+        <button id="4" class="purple">4</button
+        ><button id="5" class="purple">5</button
+        ><button id="6" class="purple">6</button
+        ><button id="subtract" class="yellow">-</button>
+
+        <button id="1" class="purple">1</button
+        ><button id="2" class="purple">2</button
+        ><button id="3" class="purple">3</button
+        ><button id="add" class="yellow">+</button>
+
+        <button id="zero" class="purple">0</button
+        ><button id="decimal" class="purple">.</button
+        ><button id="equals" class="yellow">=</button>
+      </main>
+      <div class="extra"></div>
+    </div>
+</div>
+  </body>
 </html>
