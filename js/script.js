@@ -1,10 +1,8 @@
 "use strict";
 
-// test 5 + 0 = (expected result 5)
-// test 5 + 5 = (expected result 10)
-// test 7 + 5 + 1 + 3 = (expected result 16)
-// test 5 + -5 + -3 = (expected result -8)
-// test 3.05 + .008 = (expected result 3.058)
+// Bug[test 100 + 50% + 6 ]Math works but smallText is wrong
+// Bug[screen will allow overflow] // Needs to limit mainText.innerText.length to 13 even with returned numbers i.e. equals ... 
+// Bug[screen will grow vertically with too many inputs]
 
 const screen = document.querySelector("#screen");
 const smallText = document.querySelector("#small-text");
@@ -31,15 +29,21 @@ const eightBtn = document.querySelector("#eight");
 const nineBtn = document.querySelector("#nine");
 const decimalBtn = document.querySelector("#decimal");
 
-let currentMainNum = 0;
+const multiply = (a, b) => a * b;
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const divide = (a, b) => a / b;
+
+let currentMainNum = "0";
 let currentTotal = 0;
 let currentOperator;
 let operatorText;
 
 zeroBtn.addEventListener("click", function () {
-  if (currentMainNum === "0" && currentMainNum.indexOf(".") === -1) {
-    return;
-  } else {
+  if (
+    (currentMainNum !== "0" && currentMainNum !== "-0") ||
+    currentMainNum.indexOf(".") !== -1
+  ) {
     mainText.innerText += "0";
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum += "0";
@@ -51,6 +55,10 @@ oneBtn.addEventListener("click", function () {
     mainText.innerText = "1";
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum = "1";
+  } else if (mainText.innerText === "-0") {
+    mainText.innerText = "-1";
+    mainText.innerText = "-1";
+    currentMainNum = "-1";
   } else {
     mainText.innerText += "1";
     mainText.innerText = addCommas(mainText.innerText);
@@ -63,6 +71,10 @@ twoBtn.addEventListener("click", function () {
     mainText.innerText = "2";
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum = "2";
+  } else if (mainText.innerText === "-0") {
+    mainText.innerText = "-2";
+    mainText.innerText = "-2";
+    currentMainNum = "-2";
   } else {
     mainText.innerText += "2";
     mainText.innerText = addCommas(mainText.innerText);
@@ -75,6 +87,10 @@ threeBtn.addEventListener("click", function () {
     mainText.innerText = "3";
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum = "3";
+  } else if (mainText.innerText === "-0") {
+    mainText.innerText = "-3";
+    mainText.innerText = "-3";
+    currentMainNum = "-3";
   } else {
     mainText.innerText += "3";
     mainText.innerText = addCommas(mainText.innerText);
@@ -87,6 +103,10 @@ fourBtn.addEventListener("click", function () {
     mainText.innerText = "4";
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum = "4";
+  } else if (mainText.innerText === "-0") {
+    mainText.innerText = "-4";
+    mainText.innerText = "-4";
+    currentMainNum = "-4";
   } else {
     mainText.innerText += "4";
     mainText.innerText = addCommas(mainText.innerText);
@@ -99,6 +119,10 @@ fiveBtn.addEventListener("click", function () {
     mainText.innerText = "5";
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum = "5";
+  } else if (mainText.innerText === "-0") {
+    mainText.innerText = "-5";
+    mainText.innerText = "-5";
+    currentMainNum = "-5";
   } else {
     mainText.innerText += "5";
     mainText.innerText = addCommas(mainText.innerText);
@@ -111,6 +135,10 @@ sixBtn.addEventListener("click", function () {
     mainText.innerText = "6";
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum = "6";
+  } else if (mainText.innerText === "-0") {
+    mainText.innerText = "-6";
+    mainText.innerText = "-6";
+    currentMainNum = "-6";
   } else {
     mainText.innerText += "6";
     mainText.innerText = addCommas(mainText.innerText);
@@ -123,6 +151,10 @@ sevenBtn.addEventListener("click", function () {
     mainText.innerText = "7";
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum = "7";
+  } else if (mainText.innerText === "-0") {
+    mainText.innerText = "-7";
+    mainText.innerText = "-7";
+    currentMainNum = "-7";
   } else {
     mainText.innerText += "7";
     mainText.innerText = addCommas(mainText.innerText);
@@ -135,6 +167,10 @@ eightBtn.addEventListener("click", function () {
     mainText.innerText = "8";
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum = "8";
+  } else if (mainText.innerText === "-0") {
+    mainText.innerText = "-8";
+    mainText.innerText = "-8";
+    currentMainNum = "-8";
   } else {
     mainText.innerText += "8";
     mainText.innerText = addCommas(mainText.innerText);
@@ -147,6 +183,10 @@ nineBtn.addEventListener("click", function () {
     mainText.innerText = "9";
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum = "9";
+  } else if (mainText.innerText === "-0") {
+    mainText.innerText = "-9";
+    mainText.innerText = "-9";
+    currentMainNum = "-9";
   } else {
     mainText.innerText += "9";
     mainText.innerText = addCommas(mainText.innerText);
@@ -159,6 +199,7 @@ clearBtn.addEventListener("click", function () {
   mainText.innerText = "0";
   smallText.innerText = "0";
   currentMainNum = "0";
+  currentTotal = 0;
 });
 
 decimalBtn.addEventListener("click", function () {
@@ -178,7 +219,7 @@ percentageBtn.addEventListener("click", percentage);
 
 function addCommas(nStr) {
   nStr += "";
-  nStr = nStr.replace(/[^\d.]/g, "");
+  nStr = nStr.replace(/[^-?\d.]/g, "");
   let x = nStr.split(".");
   let x1 = x[0];
   let x2 = x.length > 1 ? "." + x[1] : "";
@@ -205,81 +246,186 @@ function togglePosNeg(str) {
   }
 }
 
-// test 100 + 50%    should equal 150
-//curTot + %    >>  curTot += curTot * %
-//(100) + (50%) >> (100+= 100 * .50)
-
 function percentage() {
   let percentNum = Number(mainText.innerText);
   percentNum = Number((percentNum / 100).toFixed(2));
-  // currentTotal
-  if (currentTotal !== 0) {
-    let percentTot = currentTotal * percentNum;
-    let total = currentOperator(currentTotal, percentTot);
-    operatorText = "%";
-    percentNum += "";
-    smallText.innerText += " " + percentNum + operatorText;
-    mainText.innerText = total;
-    currentTotal += total;
-  } else {
-    operatorText = "%";
-    percentNum += "";
-    smallText.innerText = percentNum + operatorText;
-    mainText.innerText = 0;
-    currentOperator = multiply;
-    operatorText = "*";
-    currentTotal = percentNum + operatorText;
+  currentOperator = multiply;
+  operatorText = "*";
+  if (
+    smallText.innerText === "0" &&
+    mainText.innerText !== "0" &&
+    mainText.innerText !== "-0"
+  ) {
+    currentTotal = percentNum;
+    smallText.innerText = currentTotal + "";
+    mainText.innerText = "0";
+    currentMainNum = "0";
+  } else if (mainText.innerText !== "0" && mainText.innerText !== "-0") {
+    currentTotal = currentOperator(Number(currentTotal), Number(percentNum));
+    smallText.innerText += " " + percentNum;
+    mainText.innerText = currentTotal + "";
+    currentMainNum = "0";
   }
-  // x += x * (str decimal moved over 2)
+}
+
+//check for operator needs to change operator of
+// smallText if doesn't match current operator
+function checkForOperator() {
+  const x = smallText.innerText.trim();
+  const y = x.length;
+  const lastLetterOpCheck = x[y - 1];
+  let operatorLast = false;
+  if (lastLetterOpCheck === operatorText) {
+    operatorLast = true;
+  }
+  return operatorLast;
 }
 
 addBtn.addEventListener("click", function () {
-  const add = (a, b) => a + b;
   currentOperator = add;
   operatorText = "+";
-  if (smallText.innerText === "0") {
-    currentTotal = currentMainNum;
-    smallText.innerText = mainText.innerText + " " + operatorText;
-  } else {
-    currentTotal += Number(currentMainNum);
-    smallText.innerText += " " + mainText.innerText + " " + operatorText + " ";
+
+  const operatorLast = checkForOperator();
+  if (
+    smallText.innerTest !== "0" &&
+    mainText.innerText === "0" &&
+    mainText.innerText === "-0"
+  ) {
+    switch (operatorLast) {
+      case true:
+        break;
+      case false:
+        smallText.innerText = smallText.innerText.trimEnd() + " + ";
+        break;
+    }
+  } else if (
+    smallText.innerText !== "0" &&
+    (mainText.innerText !== "0") & (mainText.innerText !== "-0")
+  ) {
+    switch (operatorLast) {
+      case true:
+        smallText.innerText =
+          smallText.innerText.trim() + " " + mainText.innerText;
+        currentTotal = add(Number(currentTotal), Number(currentMainNum));
+        break;
+      case false:
+        smallText.innerText =
+          smallText.innerText.trim() +
+          " " +
+          operatorText +
+          " " +
+          mainText.innerText;
+        currentTotal = add(Number(currentTotal), Number(currentMainNum));
+        break;
+    }
+  } else if (
+    smallText.innerText === "0" &&
+    mainText.innerText !== "0" &&
+    mainText.innerText !== "-0"
+  ) {
+    currentTotal = Number(currentMainNum);
+    smallText.innerText = mainText.innerText + " " + operatorText + " ";
   }
-  mainText.innerText = 0;
-  currentMainNum = '0';
+  mainText.innerText = "0";
+  currentMainNum = "0";
 });
 
 subtractBtn.addEventListener("click", function () {
-  const subtract = (a, b) => a - b;
   currentOperator = subtract;
   operatorText = "-";
-  if (smallText.innerText === "0") {
-    currentTotal = currentMainNum;
-    smallText.innerText = mainText.innerText + " " + operatorText;
-  } else {
-    smallText.innerText += " " + mainText.innerText + " " + operatorText + " ";
-    currentTotal -= Number(currentMainNum);
+  const operatorLast = checkForOperator();
+  if (
+    smallText.innerText === "0" &&
+    (mainText.innerText === "0" || mainText.innerText === "-0")
+  ) {
+  } else if (
+    smallText.innerTest !== "0" &&
+    (mainText.innerText === "0" || mainText.innerText === "-0")
+  ) {
+    switch (operatorLast) {
+      case true:
+        break;
+      case false:
+        smallText.innerText =
+          smallText.innerText.trimEnd() + " " + operatorText + " ";
+        break;
+    }
+  } else if (
+    smallText.innerText !== "0" &&
+    mainText.innerText !== "0" &&
+    mainText.innerText !== "-0"
+  ) {
+    switch (operatorLast) {
+      case true:
+        smallText.innerText =
+          smallText.innerText.trim() + " " + mainText.innerText;
+        currentTotal = subtract(Number(currentTotal), Number(currentMainNum));
+        break;
+      case false:
+        smallText.innerText =
+          smallText.innerText.trim() +
+          " " +
+          operatorText +
+          " " +
+          mainText.innerText;
+        currentTotal = subtract(Number(currentTotal), Number(currentMainNum));
+        break;
+    }
+  } else if (
+    smallText.innerText === "0" &&
+    (mainText.innerText !== "0") & (mainText.innerText !== "-0")
+  ) {
+    currentTotal = Number(currentMainNum);
+    smallText.innerText = mainText.innerText.trim() + " " + operatorText + " ";
   }
-  mainText.innerText = 0;
-  currentMainNum = '0';
+  mainText.innerText = "0";
+  currentMainNum = "0";
 });
 
 multiplyBtn.addEventListener("click", function () {
-  const multiply = (a, b) => a * b;
   currentOperator = multiply;
   operatorText = "*";
-  if (smallText.innerText === "0") {
-    currentTotal = currentMainNum;
-    smallText.innerText = mainText.innerText + " " + operatorText;
-  } else {
-    smallText.innerText += " " + mainText.innerText + " " + operatorText + " ";
-    currentTotal = multiply(Number(currentTotal), Number(currentMainNum));
+  const operatorLast = checkForOperator();
+
+  if (smallText.innerTest !== "0" && mainText.innerText === "0") {
+    switch (operatorLast) {
+      case true:
+        smallText.innerText = smallText.innerText.trim() + " ";
+        break;
+      case false:
+        smallText.innerText += " " + operatorText + " ";
+        break;
+    }
+  } else if (
+    smallText.innerText !== "0" &&
+    mainText.innerText !== "0" &&
+    mainText.innerText !== "-0"
+  ) {
+    switch (operatorLast) {
+      case true:
+        smallText.innerText =
+          smallText.innerText.trim() + " " + mainText.innerText;
+        currentTotal = Number(currentTotal) * Number(currentMainNum);
+
+        break;
+      case false:
+        smallText.innerText += " " + operatorText + " " + mainText.innerText;
+        currentTotal = Number(currentTotal) * Number(currentMainNum);
+        break;
+    }
+  } else if (
+    smallText.innerText === "0" &&
+    mainText.innerText !== "0" &&
+    mainText.innerText !== "-0"
+  ) {
+    currentTotal = Number(currentMainNum);
+    smallText.innerText = mainText.innerText + " " + operatorText + " ";
   }
-  mainText.innerText = 0;
-  currentMainNum = '0';
+  mainText.innerText = "0";
+  currentMainNum = "0";
 });
 
 divideBtn.addEventListener("click", function () {
-  const divide = (a, b) => a / b;
   currentOperator = divide;
   operatorText = "/";
   if (smallText.innerText === "0") {
@@ -290,16 +436,63 @@ divideBtn.addEventListener("click", function () {
     currentTotal = divide(Number(currentTotal), Number(currentMainNum));
   }
   mainText.innerText = 0;
-  currentMainNum = '0';
+  currentMainNum = "0";
 });
 
 equalsBtn.addEventListener("click", function () {
-  smallText.innerText += " " + mainText.innerText;
-  currentTotal = currentOperator(
-    Number(currentTotal),
-    Number(mainText.innerText)
-  );
-  mainText.innerText = currentTotal;
-  currentOperator = undefined;
-  currentTotal = 0;
+  const operatorLast = checkForOperator();
+
+if (
+    smallText.innerTest !== "0" &&
+    (mainText.innerText === "0" || mainText.innerText === "-0")
+  ) {
+    mainText.innerText = currentTotal;
+  } else if (
+    smallText.innerText !== "0" &&
+    (mainText.innerText !== "0" ||
+    mainText.innerText !== "-0")
+  ) {
+    switch (operatorLast) {
+      case true:
+        smallText.innerText =
+          smallText.innerText.trim() + " " + mainText.innerText;
+        currentTotal = currentOperator(
+          Number(currentTotal),
+          Number(currentMainNum)
+        );
+        mainText.innerText = currentTotal + "";
+        break;
+      case false:
+        smallText.innerText =
+          smallText.innerText.trim() +
+          " " +
+          operatorText +
+          " " +
+          mainText.innerText;
+        currentTotal = currentOperator(
+          Number(currentTotal),
+          Number(currentMainNum)
+        );
+        mainText.innerText = currentTotal + "";
+        break;
+    }
+  } else if (
+    smallText.innerText === "0" &&
+    (mainText.innerText !== "0" ||
+    mainText.innerText !== "-0")
+  ) {
+    mainText.innerText = mainText.innerText;
+  }
+  allBtn.forEach(btn => btn.addEventListener('click', nextBtnClickClear));
 });
+
+const allBtn = document.querySelectorAll('button');
+function nextBtnClickClear(){
+  mainText.innerText = "0";
+  smallText.innerText = "0";
+  currentMainNum = "0";
+  currentTotal = 0; 
+  currentOperator = undefined;
+  operatorText = undefined;
+  allBtn.forEach(btn => btn.removeEventListener('click', nextBtnClickClear));
+}
