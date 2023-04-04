@@ -40,28 +40,34 @@ let currentOperator;
 let operatorText;
 
 zeroBtn.addEventListener("click", function () {
-  if (
-    (currentMainNum !== "0" && currentMainNum !== "-0") ||
-    currentMainNum.indexOf(".") !== -1
-  ) {
-    mainText.innerText += "0";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += "0";
+  const mainTextLength = addCommas(mainText.innerText).length;
+  if (mainTextLength <= 12) {
+    if (
+      (currentMainNum !== "0" && currentMainNum !== "-0") ||
+      currentMainNum.indexOf(".") !== -1
+    ) {
+      mainText.innerText += "0";
+      mainText.innerText = addCommas(mainText.innerText);
+      currentMainNum += "0";
+    }
   }
 });
 
 function numberBtnPress(btnText) {
-  if (mainText.innerText === "0") {
-    mainText.innerText = btnText;
-    currentMainNum = btnText;
-  } else if (mainText.innerText === "-0") {
-    mainText.innerText = "-" + btnText;
-    mainText.innerText = "-" + btnText;
-    currentMainNum = "-" + btnText;
-  } else {
-    mainText.innerText += btnText;
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += btnText;
+  const mainTextLength = addCommas(mainText.innerText).length;
+  if (mainTextLength <= 12) {
+    if (mainText.innerText === "0") {
+      mainText.innerText = btnText;
+      currentMainNum = btnText;
+    } else if (mainText.innerText === "-0") {
+      mainText.innerText = "-" + btnText;
+      mainText.innerText = "-" + btnText;
+      currentMainNum = "-" + btnText;
+    } else {
+      mainText.innerText += btnText;
+      mainText.innerText = addCommas(mainText.innerText);
+      currentMainNum += btnText;
+    }
   }
 }
 
@@ -111,10 +117,13 @@ nineBtn.addEventListener("click", function () {
 });
 
 decimalBtn.addEventListener("click", function () {
-  if (mainText.innerText.indexOf(".") === -1) {
-    mainText.innerText += ".";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += ".";
+  const mainTextLength = addCommas(mainText.innerText).length;
+  if (mainTextLength <= 12) {
+    if (mainText.innerText.indexOf(".") === -1) {
+      mainText.innerText += ".";
+      mainText.innerText = addCommas(mainText.innerText);
+      currentMainNum += ".";
+    }
   }
 });
 
@@ -326,7 +335,11 @@ equalsBtn.addEventListener("click", function () {
     smallText.innerTest !== "0" &&
     (mainText.innerText === "0" || mainText.innerText === "-0")
   ) {
-    mainText.innerText = addCommas(currentTotal) + '';
+    if (addCommas(currentTotal).length < 14) {
+      mainText.innerText = addCommas(currentTotal) + "";
+    } else {
+      mainText.innerText = "Error: Too long";
+    }
   } else if (
     smallText.innerText !== "0" &&
     mainText.innerText !== "0" &&
@@ -340,7 +353,11 @@ equalsBtn.addEventListener("click", function () {
           Number(currentTotal),
           Number(currentMainNum)
         );
-        mainText.innerText = addCommas(currentTotal) + '';
+        if (addCommas(currentTotal).length < 14) {
+          mainText.innerText = addCommas(currentTotal) + "";
+        } else {
+          mainText.innerText = "Error: Too long";
+        }
         break;
       case false:
         smallText.innerText =
@@ -353,7 +370,11 @@ equalsBtn.addEventListener("click", function () {
           Number(currentTotal),
           Number(currentMainNum)
         );
-        mainText.innerText = addCommas(currentTotal) + '';
+        if (addCommas(mainText.currentTotal).length < 14) {
+          mainText.innerText = addCommas(currentTotal) + "";
+        } else {
+          mainText.innerText = "Error: Too long";
+        }
         break;
     }
   } else if (
@@ -361,7 +382,11 @@ equalsBtn.addEventListener("click", function () {
     mainText.innerText !== "0" &&
     mainText.innerText !== "-0"
   ) {
-    mainText.innerText = addCommas(currentTotal) + '';
+    if (addCommas(mainText.innerText).length < 14) {
+      mainText.innerText = addCommas(mainText.innerText) + "";
+    } else {
+      mainText.innerText = "Error: Too long";
+    }
   }
   allBtn.forEach((btn) => btn.addEventListener("click", nextBtnClickClear));
 });
