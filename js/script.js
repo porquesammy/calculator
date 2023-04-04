@@ -326,7 +326,7 @@ equalsBtn.addEventListener("click", function () {
     smallText.innerTest !== "0" &&
     (mainText.innerText === "0" || mainText.innerText === "-0")
   ) {
-    mainText.innerText = currentTotal;
+    mainText.innerText = addCommas(currentTotal) + '';
   } else if (
     smallText.innerText !== "0" &&
     mainText.innerText !== "0" &&
@@ -340,7 +340,7 @@ equalsBtn.addEventListener("click", function () {
           Number(currentTotal),
           Number(currentMainNum)
         );
-        mainText.innerText = currentTotal + "";
+        mainText.innerText = addCommas(currentTotal) + '';
         break;
       case false:
         smallText.innerText =
@@ -353,7 +353,7 @@ equalsBtn.addEventListener("click", function () {
           Number(currentTotal),
           Number(currentMainNum)
         );
-        mainText.innerText = currentTotal + "";
+        mainText.innerText = addCommas(currentTotal) + '';
         break;
     }
   } else if (
@@ -361,7 +361,7 @@ equalsBtn.addEventListener("click", function () {
     mainText.innerText !== "0" &&
     mainText.innerText !== "-0"
   ) {
-    mainText.innerText = mainText.innerText;
+    mainText.innerText = addCommas(currentTotal) + '';
   }
   allBtn.forEach((btn) => btn.addEventListener("click", nextBtnClickClear));
 });
