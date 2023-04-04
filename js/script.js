@@ -50,156 +50,64 @@ zeroBtn.addEventListener("click", function () {
   }
 });
 
-oneBtn.addEventListener("click", function () {
+function numberBtnPress(btnText) {
   if (mainText.innerText === "0") {
-    mainText.innerText = "1";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum = "1";
+    mainText.innerText = btnText;
+    currentMainNum = btnText;
   } else if (mainText.innerText === "-0") {
-    mainText.innerText = "-1";
-    mainText.innerText = "-1";
-    currentMainNum = "-1";
+    mainText.innerText = "-" + btnText;
+    mainText.innerText = "-" + btnText;
+    currentMainNum = "-" + btnText;
   } else {
-    mainText.innerText += "1";
+    mainText.innerText += btnText;
     mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += "1";
+    currentMainNum += btnText;
   }
+}
+
+oneBtn.addEventListener("click", function () {
+  const btnText = document.querySelector("#one").innerText.trim();
+  numberBtnPress(btnText);
 });
 
 twoBtn.addEventListener("click", function () {
-  if (mainText.innerText === "0") {
-    mainText.innerText = "2";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum = "2";
-  } else if (mainText.innerText === "-0") {
-    mainText.innerText = "-2";
-    mainText.innerText = "-2";
-    currentMainNum = "-2";
-  } else {
-    mainText.innerText += "2";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += "2";
-  }
+  const btnText = document.querySelector("#two").innerText.trim();
+  numberBtnPress(btnText);
 });
 
 threeBtn.addEventListener("click", function () {
-  if (mainText.innerText === "0") {
-    mainText.innerText = "3";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum = "3";
-  } else if (mainText.innerText === "-0") {
-    mainText.innerText = "-3";
-    mainText.innerText = "-3";
-    currentMainNum = "-3";
-  } else {
-    mainText.innerText += "3";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += "3";
-  }
+  const btnText = document.querySelector("#three").innerText.trim();
+  numberBtnPress(btnText);
 });
 
 fourBtn.addEventListener("click", function () {
-  if (mainText.innerText === "0") {
-    mainText.innerText = "4";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum = "4";
-  } else if (mainText.innerText === "-0") {
-    mainText.innerText = "-4";
-    mainText.innerText = "-4";
-    currentMainNum = "-4";
-  } else {
-    mainText.innerText += "4";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += "4";
-  }
+  const btnText = document.querySelector("#four").innerText.trim();
+  numberBtnPress(btnText);
 });
 
 fiveBtn.addEventListener("click", function () {
-  if (mainText.innerText === "0") {
-    mainText.innerText = "5";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum = "5";
-  } else if (mainText.innerText === "-0") {
-    mainText.innerText = "-5";
-    mainText.innerText = "-5";
-    currentMainNum = "-5";
-  } else {
-    mainText.innerText += "5";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += "5";
-  }
+  const btnText = document.querySelector("#five").innerText.trim();
+  numberBtnPress(btnText);
 });
 
 sixBtn.addEventListener("click", function () {
-  if (mainText.innerText === "0") {
-    mainText.innerText = "6";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum = "6";
-  } else if (mainText.innerText === "-0") {
-    mainText.innerText = "-6";
-    mainText.innerText = "-6";
-    currentMainNum = "-6";
-  } else {
-    mainText.innerText += "6";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += "6";
-  }
+  const btnText = document.querySelector("#six").innerText.trim();
+  numberBtnPress(btnText);
 });
 
 sevenBtn.addEventListener("click", function () {
-  if (mainText.innerText === "0") {
-    mainText.innerText = "7";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum = "7";
-  } else if (mainText.innerText === "-0") {
-    mainText.innerText = "-7";
-    mainText.innerText = "-7";
-    currentMainNum = "-7";
-  } else {
-    mainText.innerText += "7";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += "7";
-  }
+  const btnText = document.querySelector("#seven").innerText.trim();
+  numberBtnPress(btnText);
 });
 
 eightBtn.addEventListener("click", function () {
-  if (mainText.innerText === "0") {
-    mainText.innerText = "8";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum = "8";
-  } else if (mainText.innerText === "-0") {
-    mainText.innerText = "-8";
-    mainText.innerText = "-8";
-    currentMainNum = "-8";
-  } else {
-    mainText.innerText += "8";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += "8";
-  }
+  const btnText = document.querySelector("#eight").innerText.trim();
+  numberBtnPress(btnText);
 });
 
 nineBtn.addEventListener("click", function () {
-  if (mainText.innerText === "0") {
-    mainText.innerText = "9";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum = "9";
-  } else if (mainText.innerText === "-0") {
-    mainText.innerText = "-9";
-    mainText.innerText = "-9";
-    currentMainNum = "-9";
-  } else {
-    mainText.innerText += "9";
-    mainText.innerText = addCommas(mainText.innerText);
-    currentMainNum += "9";
-  }
-});
-
-//clear both lines and reset equations
-clearBtn.addEventListener("click", function () {
-  mainText.innerText = "0";
-  smallText.innerText = "0";
-  currentMainNum = "0";
-  currentTotal = 0;
+  const btnText = document.querySelector("#nine").innerText.trim();
+  numberBtnPress(btnText);
 });
 
 decimalBtn.addEventListener("click", function () {
@@ -208,6 +116,13 @@ decimalBtn.addEventListener("click", function () {
     mainText.innerText = addCommas(mainText.innerText);
     currentMainNum += ".";
   }
+});
+
+clearBtn.addEventListener("click", function () {
+  mainText.innerText = "0";
+  smallText.innerText = "0";
+  currentMainNum = "0";
+  currentTotal = 0;
 });
 
 posNegBtn.addEventListener("click", function () {
